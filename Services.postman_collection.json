@@ -1,0 +1,194 @@
+{
+	"info": {
+		"_postman_id": "39267b61-9750-4c6e-8bc0-88a87e698177",
+		"name": "Services",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "28694979"
+	},
+	"item": [
+		{
+			"name": "Obtener todas las actividades",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/activities/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"activities",
+						""
+					]
+				},
+				"description": "# GET ACTIVITIES\n\n### Endpoint: Obtener todas las actividades\n\n### Descripción:\n\nEste endpoint permite obtener la lista de todas las actividades registradas en el sistema.\n\n### URL:\n\n**GET /activities**\n\n### Parámetros:\n\nEste endpoint **no requiere parámetros** en la solicitud.\n\n### Cuerpo de la solicitud:\n\nEste endpoint **no requiere cuerpo de solicitud**.\n\n### Ejemplo de solicitud:\n\n``` javascript\nGET /activities HTTP/1.1\nHost: api.ejemplo.com\n\n ```\n\n## Respuesta exitosa:\n\n### Código de estado: `200 OK`\n\n#### Ejemplo de respuesta:\n\n``` json\n{\n    \"Success\": true,\n    \"Detail\": [\n        {\n            \"id\": 1,\n            \"name\": \"Actividad 1\",\n            \"description\": \"Descripción de la actividad 1\",\n            \"created_at\": \"2024-02-13T15:30:00\"\n        },\n        {\n            \"id\": 2,\n            \"name\": \"Actividad 2\",\n            \"description\": \"Descripción de la actividad 2\",\n            \"created_at\": \"2024-02-13T16:00:00\"\n        }\n    ]\n}\n\n ```\n\n## Errores y códigos de estado:\n\n| Código | Descripción |\n| --- | --- |\n| **200 OK** | Lista de actividades obtenida exitosamente. |\n| **500 Internal Server Error** | Error interno al obtener las actividades. |\n\n## Consideraciones adicionales:\n\n- **Autenticación:** Se recomienda implementar autenticación para restringir el acceso a usuarios autorizados.\n    \n- **Manejo de excepciones:** Se deben capturar errores inesperados para evitar fallos en la aplicación.\n    \n- **Optimización de consulta:** Si el número de actividades es muy grande, se puede implementar paginación para mejorar el rendimiento."
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener una actividad por ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/activities/4/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"activities",
+						"4",
+						""
+					]
+				},
+				"description": "# GET ACTIVITY BY ID\n\n### Endpoint: Obtener una actividad por ID\n\n### Descripción:\n\nEste endpoint permite obtener una actividad específica mediante su ID.\n\n### URL:\n\n**GET /activities/{id}**\n\n### Parámetros:\n\n| Tipo | Nombre | Descripción |\n| --- | --- | --- |\n| Path | id | ID de la actividad que se desea consultar. |\n\n### Cuerpo de la solicitud:\n\nEste endpoint **no requiere cuerpo de solicitud**.\n\n### Ejemplo de solicitud:\n\n``` javascript\nGET /activities/1 HTTP/1.1\nHost: api.ejemplo.com\n\n ```\n\n## Respuesta exitosa:\n\n### Código de estado: `200 OK`\n\n#### Ejemplo de respuesta:\n\n``` json\n{\n    \"Success\": true,\n    \"Detail\": {\n        \"id\": 4,\n        \"usuario\": \"Nicolás Martínez\",\n        \"proyecto\": \"PhoenixApp\",\n        \"compania\": \"Phoenix\",\n        \"tipo\": \"Implementación\",\n        \"descripcion\": \"Revisión de código (code review)\",\n        \"minutos\": 221,\n        \"fecha\": \"2024-12-06\",\n        \"equipo\": \"Líderes de estrategia y coordinación\"\n    }\n}\n\n ```\n\n## Errores y códigos de estado:\n\n| Código | Descripción |\n| --- | --- |\n| **200 OK** | Actividad obtenida exitosamente. |\n| **404 Not Found** | Actividad no encontrada. |\n| **500 Internal Server Error** | Error interno al obtener la actividad. |"
+			},
+			"response": []
+		},
+		{
+			"name": "Crear una nueva actividad",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"usuario\": \"Juan Pérez\",\r\n  \"proyecto\": \"Seguridad Web\",\r\n  \"compania\": \"Tech Corp\",\r\n  \"tipo\": \"Auditoría\",\r\n  \"descripcion\": \"Evaluación de seguridad en la infraestructura\",\r\n  \"minutos\": 90,\r\n  \"fecha\": \"2025-02-14\",\r\n  \"equipo\": \"Equipo Azul\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/activities/create",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"activities",
+						"create"
+					]
+				},
+				"description": "# CREATE ACTIVITIES\n\n### Endpoint: Crear una nueva actividad\n\n### Descripción:\n\nEste endpoint permite registrar una nueva actividad en el sistema.\n\n### URL:\n\n**POST /activities/create**\n\n### Parámetros:\n\nEste endpoint **no requiere parámetros** en la solicitud.\n\n### Cuerpo de la solicitud:\n\n| Atributo | Descripción |\n| --- | --- |\n| id | number |\n| usuario | string |\n| usuario | string |\n| proyecto | string |\n| compania | string |\n| tipo | string |\n| descripcion | string |\n| minutos | number |\n| fecha | date |\n| equipo | string |\n\n### Ejemplo de solicitud:\n\n``` json\n{\n  \"usuario\": \"Juan Pérez\",\n  \"proyecto\": \"Seguridad Web\",\n  \"compania\": \"Tech Corp\",\n  \"tipo\": \"Auditoría\",\n  \"descripcion\": \"Evaluación de seguridad en la infraestructura\",\n  \"minutos\": 90,\n  \"fecha\": \"2025-02-14\",\n  \"equipo\": \"Equipo Azul\"\n}\n\n ```\n\n## Respuesta exitosa:\n\n### Código de estado: `201 Created`\n\n``` json\n{\n    \"Success\": true,\n    \"Detail\": {\n        \"id\": 3,\n        \"usuario\": \"juanperez\",\n        \"proyecto\": \"Proyecto Alpha\",\n        \"compania\": \"TechCorp\",\n        \"tipo\": \"Desarrollo\",\n        \"descripcion\": \"Implementación de módulo de autenticación\",\n        \"minutos\": 120,\n        \"fecha\": \"2024-02-14\",\n        \"equipo\": \"Backend\"\n    }\n}\n\n ```\n\n## Errores y códigos de estado:\n\n| Código | Descripción |\n| --- | --- |\n| 201 Created | Actividad creada exitosamente. |\n| 500 Internal Server Error | Error al crear la actividad. |"
+			},
+			"response": []
+		},
+		{
+			"name": "Actualizar una actividad existente",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"usuario\": \"Kevin Castrillon1\"\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/activities/update/50/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"activities",
+						"update",
+						"50",
+						""
+					]
+				},
+				"description": "# **UPDATE ACTIVITY**\n\n#### **Endpoint**: Actualizar una actividad existente\n\n#### **Descripción**:\n\n**Este endpoint permite actualizar los datos de una actividad existente en el sistema utilizando su ID.**\n\n### **URL**:\n\n**POST /activities/update/:id**\n\n### Parámetros:\n\n| Parámetro | Tipo | Descripción |\n| --- | --- | --- |\n| id | number | ID de la actividad que se desea actualizar. |\n\n### **Cuerpo de la solicitud (Body)**:\n\nEl cuerpo de la solicitud debe ser un objeto JSON con los atributos que se desean actualizar. Los atributos disponibles son:\n\n### Cuerpo de la solicitud:\n\n| Atributo | Descripción |\n| --- | --- |\n| id | number |\n| usuario | string |\n| usuario | string |\n| proyecto | string |\n| compania | string |\n| tipo | string |\n| descripcion | string |\n| minutos | number |\n| fecha | date |\n| equipo | string |\n\n### **Ejemplo de solicitud (Request)**:\n\n``` json\n{\n  \"usuario\": \"Juan Pérez\",\n  \"proyecto\": \"Seguridad Web\",\n  \"compania\": \"Tech Corp\",\n  \"tipo\": \"Auditoría\",\n  \"descripcion\": \"Evaluación de seguridad en la infraestructura\",\n  \"minutos\": 90,\n  \"fecha\": \"2025-02-14\",\n  \"equipo\": \"Equipo Azul\"\n}\n\n ```\n\n## Respuesta exitosa:\n\n#### Código de estado: `200 OK`\n\n``` json\n{\n  \"Success\": true,\n  \"Detail\": {\n    \"id\": 3,\n    \"usuario\": \"Juan Pérez\",\n    \"proyecto\": \"Seguridad Web\",\n    \"compania\": \"Tech Corp\",\n    \"tipo\": \"Auditoría\",\n    \"descripcion\": \"Revisión de vulnerabilidades en la API\",\n    \"minutos\": 60,\n    \"fecha\": \"2025-02-14\",\n    \"equipo\": \"Equipo Azul\"\n  }\n}\n\n ```\n\n### **Errores y códigos de estado**:\n\n| Código | Descripción |\n| --- | --- |\n| 200 OK | Actividad actualizada exitosamente. |\n| 404 Not Found | La actividad no fue encontrada. |\n| 500 Internal Server Error | Error al actualizar la actividad. |\n\n### **Notas adicionales**:\n\n- Solo se deben incluir en el cuerpo de la solicitud los campos que se desean actualizar.\n    \n- El campo `fecha` debe seguir el formato `YYYY-MM-DD`.\n    \n- El campo `minutos` debe ser un número entero positivo."
+			},
+			"response": []
+		},
+		{
+			"name": "Eliminar una actividad",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/activities/delete/1/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"activities",
+						"delete",
+						"1",
+						""
+					]
+				},
+				"description": "# **DELETE ACTIVITY**\n\n### Endpoint: Eliminar una actividad existente\n\n### Descripción:\n\nEste endpoint permite eliminar una actividad existente en el sistema utilizando su ID.\n\n**URL:**  \n`DELETE /activities/delete/:id`\n\n### Parámetros:\n\n| Parámetro | Tipo | Descripción |\n| --- | --- | --- |\n| id | number | ID de la actividad que se desea eliminar. |\n\n## Respuesta exitosa:\n\n#### Código de estado: `200 OK`\n\n#### Ejemplo de respuesta:\n\n``` json\n{\n  \"Success\": true,\n  \"Message\": \"Actividad eliminada\",\n  \"Detail\": \"La actividad con ID 3 fue eliminada correctamente\"\n}\n\n ```\n\n#### **Errores y códigos de estado:**\n\n| Código | Descripción |\n| --- | --- |\n| 200 OK | Actividad eliminada exitosamente. |\n| 404 Not Found | La actividad no fue encontrada. |\n| 500 Internal Server Error | Error al eliminar la actividad. |\n\n#### **Notas adicionales:**\n\n- Asegúrate de proporcionar un ID válido de la actividad que deseas eliminar.\n    \n- Si el ID de la actividad no existe, recibirás un error `404 Not Found`.\n    \n- Si ocurre algún problema en el servidor al procesar la solicitud, recibirás un error `500 Internal Server Error`."
+			},
+			"response": []
+		},
+		{
+			"name": "Busqueda-Opcional",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/activities/search?usuario=&fecha=2024-12-03",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"activities",
+						"search"
+					],
+					"query": [
+						{
+							"key": "usuario",
+							"value": ""
+						},
+						{
+							"key": "proyecto",
+							"value": "",
+							"disabled": true
+						},
+						{
+							"key": "compania",
+							"value": "",
+							"disabled": true
+						},
+						{
+							"key": "descripcion",
+							"value": "",
+							"disabled": true
+						},
+						{
+							"key": "minutos",
+							"value": "",
+							"disabled": true
+						},
+						{
+							"key": "fecha",
+							"value": "2024-12-03"
+						},
+						{
+							"key": "equipo",
+							"value": "",
+							"disabled": true
+						}
+					]
+				},
+				"description": "## GET ACTIVITIES WITH FILTERS\n\n### Endpoint: Buscar actividades con filtros opcionales\n\n### Descripción:\n\nEste endpoint permite buscar actividades en el sistema utilizando varios filtros opcionales. Los filtros son flexibles y se pueden combinar para refinar los resultados.\n\n**URL:**  \n`GET /activities/search/`\n\n#### **Parámetros de consulta (Query Parameters):**\n\n| Parámetro | Tipo | Descripción |\n| --- | --- | --- |\n| usuario | string | Filtra las actividades por el nombre del usuario. |\n| proyecto | string | Filtra las actividades por el nombre del proyecto. |\n| compania | string | Filtra las actividades por el nombre de la compañía. |\n| tipo | string | Filtra las actividades por el tipo de actividad. |\n| descripcion | string | Filtra las actividades por la descripción de la actividad. |\n| minutos | number | Filtra las actividades por la cantidad de minutos invertidos. |\n| fecha | date | Filtra las actividades por la fecha de realización (formato: YYYY-MM-DD). |\n| equipo | string | Filtra las actividades por el nombre del equipo. |\n\n### **Respuesta exitosa:**  \n**Código de estado:** 200 OK\n\n#### **Respuesta (JSON):**\n\n``` json\n{\n  \"success\": true,\n  \"message\": \"Actividades encontradas\",\n  \"detail\": \"3 resultados encontrados\",\n  \"data\": [\n    {\n      \"id\": 1,\n      \"usuario\": \"Juan Pérez\",\n      \"proyecto\": \"Seguridad Web\",\n      \"compania\": \"Tech Corp\",\n      \"tipo\": \"Auditoría\",\n      \"descripcion\": \"Evaluación de seguridad en la infraestructura\",\n      \"minutos\": 90,\n      \"fecha\": \"2025-02-14\",\n      \"equipo\": \"Equipo Azul\"\n    },\n    {\n      \"id\": 2,\n      \"usuario\": \"Carlos García\",\n      \"proyecto\": \"Desarrollo Backend\",\n      \"compania\": \"Innovatech\",\n      \"tipo\": \"Desarrollo\",\n      \"descripcion\": \"Desarrollo de APIs\",\n      \"minutos\": 120,\n      \"fecha\": \"2025-02-14\",\n      \"equipo\": \"Equipo Rojo\"\n    }\n  ]\n}\n\n\n ```\n\n#### **Errores y códigos de estado:**\n\n| Código | Descripción |\n| --- | --- |\n| 200 OK | Actividades encontradas correctamente. |\n| 400 Bad Request | Faltan parámetros o los parámetros son inválidos. |\n| 500 Internal Server Error | Error al procesar la solicitud. |\n\n####   \n**Notas adicionales:**\n\n- Al menos un filtro debe ser proporcionado en la consulta, de lo contrario, se retornará un error `400 Bad Request`.\n    \n- Los parámetros `minutos` y `fecha` deben ser valores válidos. Si no son válidos, el servidor responderá con un error detallado.\n    \n- Los filtros son opcionales y pueden ser combinados según sea necesario para refinar los resultados.\n    \n- El campo `fecha` debe seguir el formato `YYYY-MM-DD`.\n    \n- El campo `minutos` debe ser un número entero válido."
+			},
+			"response": []
+		}
+	]
+}
