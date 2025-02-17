@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Registro de Actividades - TechNova</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+    table, th, td { border: 1px solid #ccc; }
+    th, td { padding: 8px; text-align: left; }
+    form input, form button { margin: 5px 0; padding: 8px; }
+  </style>
+</head>
+<body>
+  <h1>Registro de Actividades</h1>
+
+  <form id="activityForm">
+    <input type="text" id="usuario" placeholder="Usuario" required>
+    <input type="text" id="proyecto" placeholder="Proyecto" required>
+    <input type="text" id="compania" placeholder="Compañía" required>
+    <input type="text" id="tipo" placeholder="Tipo" required>
+    <input type="text" id="descripcion" placeholder="Descripción" required>
+    <input type="number" id="minutos" placeholder="Minutos" required>
+    <input type="date" id="fecha" required>
+    <input type="text" id="equipo" placeholder="Equipo" required>
+    <button type="submit">Agregar Actividad</button>
+  </form>
+
+  <table id="activitiesTable">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Usuario</th>
+        <th>Proyecto</th>
+        <th>Compañía</th>
+        <th>Tipo</th>
+        <th>Descripción</th>
+        <th>Minutos</th>
+        <th>Fecha</th>
+        <th>Equipo</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <script>
+    const API_URL = 'http://localhost:3000/activities';
+
+    async function fetchActivities() {
+      try {
+        const res = await fetch(API_URL);
+        const activities = await res.json();
+        const tbody = document.querySelector('#activitiesTable tbody');
+        tbody.innerHTML = '';
+        activities.forEach(activity => {
+          const row = document.createElement('tr');
+          row.innerHTML = `
+            <td>${activity.id}</td>
+            <td>${activity.usuario}</td>
+            <td>${activity.proyecto}</td>
+            <td>${activity.compania}</td>
+            <td>${activity.tipo}</td>
+            <td>${activity.descripcion}</td>
+            <td>${activity.minutos}</td>
+            <td>${new Date(activity.fecha).toLocaleDateString()}</td>
+            <td>${activity.equipo}</td>
+          `;
+          tbody.appendChild(row);
+        });
+      } catch (error) {
+        console.error('Error fetching activities:', error);
+      }
+    }
+
+    document.getElementById('activityForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const newActivity = {
+        usuario: document.getElementById('usuario').value,
+        proyecto: document.getElementById('proyecto').value,
+        compania: document.getElementById('compania').value,
+        tipo: document.getElementById('tipo').value,
+        descripcion: document.getElementById('descripcion').value,
+        minutos: parseInt(document.getElementById('minutos').value),
+        fecha: document.getElementById('fecha').value,
+        equipo: document.getElementById('equipo').value,
+      };
+      try {
+        await fetch(API_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(newActivity)
+        });
+        // Limpia el formulario y actualiza la tabla
+        e.target.reset();
+        fetchActivities();
+      } catch (error) {
+        console.error('Error creando actividad:', error);
+      }
+    });
+
+    // Cargar las actividades al iniciar la página
+    fetchActivities();
+  </script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+{
+  "name": "tech-nova",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "dev": "ts-node-dev --respawn src/index.ts",
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "typeorm": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js",
+    "migration:generate": "npm run typeorm migration:generate -n",
+    "migration:run": "npm run typeorm migration:run",
+    "migration:revert": "npm run typeorm migration:revert"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "pg": "^8.13.3",
+    "reflect-metadata": "^0.1.13",
+    "tsconfig-paths": "^4.2.0"
+  },
+  "devDependencies": {
+    "@nestjs/typeorm": "^11.0.0",
+    "@types/cors": "^2.8.17",
+    "@types/express": "^4.17.13",
+    "@types/jest": "^29.5.14",
+    "jest": "^29.7.0",
+    "supertest": "^7.0.0",
+    "ts-jest": "^29.2.5",
+    "ts-node": "^10.9.2",
+    "ts-node-dev": "^2.0.0",
+    "typeorm": "^0.3.20",
+    "typescript": "^5.7.3"
+  }
+}
